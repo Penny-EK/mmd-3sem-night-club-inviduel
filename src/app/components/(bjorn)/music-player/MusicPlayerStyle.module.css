@@ -1,0 +1,64 @@
+@reference "../../../globals.css";
+
+@layer components {
+  .slider::-webkit-slider-thumb, .slider::-moz-range-thumb {
+    @apply size-6 appearance-none bg-foreground border-0 rounded-full cursor-pointer;
+  }
+
+  .slider::-webkit-slider-runnable-track, .slider::-moz-range-track {
+    @apply bg-accent appearance-none;
+  }
+  
+}
+
+.customPlayer {
+  @apply bg-transparent px-0 max-lg:min-w-[350px];
+}
+
+.customPlayer [class*="rhap_progress-bar"], .customPlayer [class*="rhap_volume-bar"] {
+  @apply bg-accent h-1 rounded-sm;
+}
+
+.customPlayer [class*="rhap_progress-container"] {
+  @apply m-0 px-6 max-lg:max-w-[350px];
+}
+
+.customPlayer [class*="rhap_volume-bar-area"] {
+  @apply px-4 max-lg:min-w-[150px];
+}
+
+.customPlayer [class*="rhap_progress-indicator"] {
+  @apply m-0 bg-foreground shadow-none w-6 h-6 top-1/2 -translate-y-1/2;
+}
+
+.customPlayer [class*="rhap_volume-indicator"] {
+  @apply m-0 bg-foreground shadow-none w-4 h-4 top-1/2 -translate-y-1/2;
+}
+
+.customPlayer [class*="rhap_controls-section"] {
+  @apply max-lg:flex-col max-lg:gap-y-6 max-lg:mt-8;
+}
+
+.customPlayer [class*="rhap_repeat-button"] {
+  @apply *:size-8 aspect-square text-foreground w-auto h-auto;
+}
+
+.customPlayer [class*="rhap_play-pause-button"] {
+  @apply border-foreground grid cursor-pointer place-items-center rounded-full border-4 border-solid;
+}
+
+.customPlayer button[aria-label="Disable loop"] {
+  @apply text-accent;
+}
+
+.customPlayer button[aria-label="Pause"] {
+  @apply border-accent *:text-accent;
+}
+
+.customPlayer button {
+  @apply w-auto h-auto overflow-visible bg-[none] text-foreground text-base
+}
+
+.customPlayer [class*="rhap_current-time"], .customPlayer [class*=rhap_total-time]{
+  @apply  font-sans text-base font-medium tracking-2pct text-foreground;
+}

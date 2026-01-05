@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --background-alpha: color-mix(in srgb, var(--background) 90%, transparent);
+  --foreground: #ffffff;
+  --accent: #ff2a70;
+
+  --content-w-desktop: 1440px;
+  --content-w-mobile: 352px;
+  --grid-col-desktop: 1fr minmax(0, var(--content-w-desktop)) 1fr;
+  --grid-col-mobile: 1fr minmax(0, var(--content-w-mobile)) 1fr;
+
+  --letter-spacing-s: 2%;
+  --letter-spacing-m: 7.5%;
+}
+
+@theme inline {
+  /* For colors: example usage = text-foreground (for color) */
+  --color-background: var(--background);
+  --color-background-alpha: var(--background-alpha);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  /* For font: use "font-sans" for font-family. */
+  --font-sans: var(--font-ubuntu-sans);
+  /* For text */
+  --tracking-2pct: var(--letter-spacing-s);
+  --tracking-7pct: var(--letter-spacing-m);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --background-alpha: color-mix(in srgb, var(--background) 90%, transparent);
+    --foreground: #ffffff;
+    --accent: #ff2a70;
+  }
+}
+
+@layer components {
+  .bottomLine-l {
+    --custom-gradient: linear-gradient(
+      90deg,
+      rgba(217, 217, 217, 0) 0%,
+      var(--accent) 50.94%,
+      rgba(217, 217, 217, 0) 99.99%
+    );
+    @apply h-0.5 w-60 [background-image:var(--custom-gradient)];
+  }
+  .bottomLine-s {
+    background-image: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-accent) 0%, transparent) 0%,
+      var(--color-accent) 50%,
+      color-mix(in srgb, var(--color-accent) 0%, transparent) 100%
+    );
+    @apply via-accent h-0.5 w-12 bg-linear-to-r from-transparent via-50% to-transparent;
+  }
+  .popoverClosed {
+    @apply max-lg:pointer-events-none max-lg:invisible max-lg:fixed max-lg:inset-0 max-lg:m-0 max-lg:h-screen max-lg:w-screen max-lg:-translate-y-full max-lg:opacity-0 max-lg:backdrop-blur-sm max-lg:transition-[opacity,translate] max-lg:transition-discrete max-lg:duration-600;
+  }
+
+  .popoverOpen {
+    @apply max-lg:pointer-events-auto max-lg:visible max-lg:z-50 max-lg:[display:grid!important] max-lg:translate-y-0 max-lg:place-items-center max-lg:opacity-100;
+  }
+
+  .hoverContainer {
+    /* Apply this, alongside "group" for the parent hover container*/
+    /* There must only be one parent hover container, the rest can be children and children of children */
+    @apply relative overflow-hidden;
+  } 
+
+  .hoverChild {
+    /* Apply this to all children of .hoverContainer */
+    /* If children of children also need hover properties, simply add "group" on the parent .hoverChild */
+    /* and use group-hover: */
+    @apply invisible pointer-events-none duration-600 opacity-0 transition-discrete transition-[opacity,translate] group-hover:visible group-hover:opacity-100 group-hover:pointer-events-auto;
+  }
+  
+  /* These hover animations can be applied to dictate what type of translate animation should be used. */
+  .hoverToTop {
+    @apply translate-y-1/2 group-hover:translate-y-0;
+  }
+  .hoverToBottom {
+    @apply -translate-y-1/2 group-hover:translate-y-0;
+  }
+  .hoverToRight {
+    @apply -translate-x-full group-hover:translate-x-0;
+  }
+  .hoverToLeft {
+    @apply translate-x-full group-hover:translate-x-0;
+  }
+
+  .noScrollbar {
+    scrollbar-width: none;
+  }
+}
+
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-ubuntu-sans), sans-serif;
+    @apply min-h-dvh max-md:min-h-svh;
+  }
+
+  main {
+    /* @apply ...; Tailwind way of pre-adding classes  */
+    /* Main will have the classes: display: grid; grid-template-columns: var(--grid-col-desktop); min-height: 100dvh; */
+    /* On Mobile, using "max-md:" which applies a media query at max 768 px width */
+    /* (Mobile Breakpoint) I apply min-height: 100svh; and grid-template-columns: var(--grid-col-mobile); */
+    @apply grid grid-cols-(--grid-col-desktop) max-md:grid-cols-(--grid-col-mobile);
+
+    > * {
+      /* All direct descendants gets placed in the minmax column. */
+      @apply col-start-2 col-end-auto;
+    }
+  }
+  /* Added to allow full bleed on images in blog post, can be moved to components if you find it confusing here */
+  .full-bleed {
+    @apply relative right-1/2 left-1/2 mr-[50vw] -ml-[50vw] w-screen;
+  }
+}
