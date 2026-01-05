@@ -18,7 +18,7 @@ const CommentReactForm = ({ id }) => {
     handleSubmit,
     setError,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   // styling
@@ -157,12 +157,20 @@ const CommentReactForm = ({ id }) => {
               Your comment has been submitted!
             </p>
           )}
+          <div className="flex items-start">
+            {/* error message for whole form */}
+            {errors.root && <p className={errorStyle}>{errors.root.message}</p>}
 
-          {/* error message for whole form */}
-          {errors.root && <p className={errorStyle}>{errors.root.message}</p>}
-
-          {/* submit */}
-          <SubmitButton />
+            <button
+              className="ml-auto border-t-2 border-b-2 px-10 py-3 text-sm font-semibold tracking-wide uppercase transition hover:bg-pink-600 hover:text-black"
+              type="submit"
+              // disable button while submitting
+              disabled={isSubmitting}
+            >
+              {/* if isSubmitting is true, change to "Submitting..." else show "Subscribe" */}
+              {isSubmitting ? "Submitting..." : "Subscribe"}
+            </button>
+          </div>
         </div>
       </form>
     </div>
