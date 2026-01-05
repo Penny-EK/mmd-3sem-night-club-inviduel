@@ -204,6 +204,13 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
           <input
             {...register("guests", {
               required: "Please enter number of guests",
+              validate: (value) => {
+                const guests = Number(value);
+                if (!Number.isFinite(guests) || guests <= 0) {
+                  return "Please enter a valid number of guests";
+                }
+                return true;
+              }
             })}
             type="number"
             placeholder="Number of Guests*"
