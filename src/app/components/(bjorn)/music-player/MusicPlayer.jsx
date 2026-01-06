@@ -91,10 +91,10 @@ export default function MusicPlayer() {
           className="max-lg:hidden"
         />
         <div className="flex-1">
-          <p className="mb-4 text-center text-2xl tracking-2pct max-lg:text-xl">{audioTracks[currentTrack].title}</p>
+          <p className="mb-4 max-lg:text-center text-2xl tracking-2pct max-lg:text-xl">{audioTracks[currentTrack].title}</p>
           <AudioPlayer 
             className={playerStyle.customPlayer}
-            volume={0.5}
+            volume={0.2}
             src={audioTracks[currentTrack].src}
             showSkipControls
             showJumpControls={false}
