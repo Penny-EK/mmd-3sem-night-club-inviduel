@@ -9,6 +9,7 @@ import 'react-h5-audio-player/lib/styles.css';
 import playerStyle from "./MusicPlayerStyle.module.css";
 // Other Components
 import ImageHover from "@/app/components/(bjorn)/ImageHover";
+import NavBtn from "@/app/components/(bjorn)/NavBtns";
 // Images
 import track1 from "@/app/assets/content-img/track1.jpg";
 import track2 from "@/app/assets/content-img/track2.jpg";
@@ -113,16 +114,16 @@ export default function MusicPlayer() {
                 aria-label="Toggle shuffle"
                 onClick={toggleShuffle}
               >
-                <IoShuffle className={`size-8 ${shuffle ? 'text-accent' : 'text-foreground'}`} />
+                <IoShuffle className={`size-8 hover:text-accent ${shuffle ? 'text-accent' : 'text-foreground'}`} />
               </button>
             ]}
             customIcons={{
-              play: <IoCaretForward className="size-8 text-foreground"/>,
-              pause: <IoPause className="size-8 text-foreground"/>,
-              previous: <IoPlaySkipBack className="size-8 text-foreground" />,
-              next: <IoPlaySkipForward className="size-8 text-foreground" />,
-              volume: <IoVolumeHigh className="size-8 text-foreground" />,
-              volumeMute: <IoVolumeMute className="size-8 text-foreground" />,
+              play: <IoCaretForward className="size-8 text-foreground hover:text-accent"/>,
+              pause: <IoPause className="size-8 text-foreground hover:text-accent"/>,
+              previous: <IoPlaySkipBack className="size-8 text-foreground hover:text-accent" />,
+              next: <IoPlaySkipForward className="size-8 text-foreground hover:text-accent" />,
+              volume: <IoVolumeHigh className="size-8 text-foreground hover:text-accent" />,
+              volumeMute: <IoVolumeMute className="size-8 text-accent hover:text-foreground" />,
             }}
           />
         </div>
@@ -167,22 +168,13 @@ export default function MusicPlayer() {
               }
             />
         </div>
-        <div className="flex gap-x-3">
-          <button
-            type="button"
-            onClick={handleClickPrevious}
-            className="border-foreground hover:text-background hover:bg-foreground grid place-items-center border-2 border-solid p-3"
-          >
-            <IoCaretBack className="size-8" />
-          </button>
-          <button
-            type="button"
-            onClick={handleClickNext}
-            className="border-foreground hover:text-background hover:bg-foreground grid place-items-center border-2 border-solid p-3"
-          >
-            <IoCaretForward className="size-8" />
-          </button>
-        </div>
+        {/* Added for accesibility reasons, per our heuristics test. */}
+        <NavBtn 
+          handlePrevious={handleClickPrevious}
+          handleNext={handleClickNext}
+          ariaPrev="Go to Previous Track"
+          ariaNext="Go to Next Track"
+        />
       </div>
     </div>
   );

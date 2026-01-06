@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import ImageHover from "../ImageHover";
+import NavBtn from "@/app/components/(bjorn)/NavBtns";
 
 // Since the date part of the json object is formatted as one long string that consists of both
 // the full date and the full time, the Date JS object will instead be used to separate
@@ -152,7 +153,7 @@ export default function GalleryContent({ data }) {
                       <span className="tracking-2pct place-self-start text-lg font-medium capitalize">
                         {item?.title}
                       </span>
-                      <span className="tracking-2pct text-base font-light mt-2">
+                      <span className="tracking-2pct mt-2 text-base font-light">
                         {item.description.split(".").slice(0, 4).join(". ") +
                           "."}
                       </span>
@@ -173,7 +174,7 @@ export default function GalleryContent({ data }) {
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex gap-4">
+      <div className="grid place-items-center gap-y-6">
         <div className="flex gap-4 max-md:hidden">
           {[0, 1, 2].map((btnIndex) => (
             <button
@@ -201,6 +202,17 @@ export default function GalleryContent({ data }) {
             />
           ))}
         </div>
+        {/* Added for accesibility reasons, per our heuristics test. */}
+        <NavBtn
+          handlePrevious={() => {
+            if (currentIndex > 0) goToSlide(currentIndex - 1);
+          }}
+          handleNext={() => {
+            if (currentIndex < data.length - 1) goToSlide(currentIndex + 1);
+          }}
+          ariaPrev="Go to Previous Slide"
+          ariaNext="Go to Next Slide"
+        />
       </div>
     </div>
   );

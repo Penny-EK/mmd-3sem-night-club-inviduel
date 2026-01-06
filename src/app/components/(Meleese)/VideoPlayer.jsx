@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import NavBtn from "@/app/components/(bjorn)/NavBtns";
+// import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const videos = [
   "/media/video-crowd.mp4",
@@ -34,7 +35,17 @@ export default function VideoPlayer() {
         />
       </div>
 
-      <div className="mt-8 flex items-center gap-6 text-white">
+      <NavBtn 
+        handlePrevious={prevVideo}
+        handleNext={nextVideo}
+        ariaPrev="Go to Previous Video"
+        ariaNext="Go to Next Video"
+      />
+      {/* 
+
+        Made into a component instead <NavBtn>, for better consistency.
+        
+        <div className="mt-8 flex items-center gap-6 text-white">
         <button
           onClick={prevVideo}
           className="border border-white p-3 transition hover:bg-white hover:text-black"
@@ -49,6 +60,8 @@ export default function VideoPlayer() {
           <FaChevronRight size={15} />
         </button>
       </div>
+
+      */}
     </div>
   );
 }

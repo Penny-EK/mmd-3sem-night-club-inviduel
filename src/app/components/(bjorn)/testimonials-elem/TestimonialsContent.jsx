@@ -1,6 +1,10 @@
 "use client";
-import ImageHover from "@/app/components/(bjorn)/ImageHover";
+// NextJS Components
 import { useState, useRef } from "react";
+// Other Components
+import ImageHover from "@/app/components/(bjorn)/ImageHover";
+import NavBtn from "@/app/components/(bjorn)/NavBtns";
+// Icons
 import { LuTwitter, LuFacebook } from "react-icons/lu";
 import { IoLogoSnapchat } from "react-icons/io5";
 
@@ -85,7 +89,7 @@ export default function TestimonialsContent({ data }) {
 
   return (
     <div className="bg-background-alpha col-span-full grid grid-cols-subgrid *:col-start-2">
-      <div className="grid place-items-center gap-y-16 my-24">
+      <div className="my-24 grid place-items-center gap-y-16">
         <div className="w-full overflow-hidden px-8 max-md:px-0">
           <div
             ref={scrollingContainer}
@@ -150,18 +154,31 @@ export default function TestimonialsContent({ data }) {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex gap-4">
-          {[0, 1, 2].map((btnIndex) => (
-            <button
-              key={btnIndex}
-              type="button"
-              onClick={() => goToSlide(btnIndex)}
-              className={`h-5 w-5 transition-colors ${
-                isBtnActive(btnIndex) ? "bg-accent" : "bg-foreground"
-              }`}
-              aria-label={`Go to slide ${btnIndex + 1}`}
-            />
-          ))}
+        <div className="grid place-items-center gap-y-6">
+          <div className="flex gap-4">
+            {[0, 1, 2].map((btnIndex) => (
+              <button
+                key={btnIndex}
+                type="button"
+                onClick={() => goToSlide(btnIndex)}
+                className={`h-5 w-5 transition-colors ${
+                  isBtnActive(btnIndex) ? "bg-accent" : "bg-foreground"
+                }`}
+                aria-label={`Go to slide ${btnIndex + 1}`}
+              />
+            ))}
+          </div>
+          {/* Added for accesibility reasons, per our heuristics test. */}
+          <NavBtn
+            handlePrevious={() => {
+              if (currentIndex > 0) goToSlide(currentIndex - 1);
+            }}
+            handleNext={() => {
+              if (currentIndex < data.length - 1) goToSlide(currentIndex + 1);
+            }}
+            ariaPrev="Go to Previous Slide"
+            ariaNext="Go to Next Slide"
+          />
         </div>
       </div>
     </div>

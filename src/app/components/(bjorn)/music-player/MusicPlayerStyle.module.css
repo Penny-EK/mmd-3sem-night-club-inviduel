@@ -47,12 +47,16 @@
   @apply border-foreground grid cursor-pointer place-items-center rounded-full border-4 border-solid;
 }
 
+.customPlayer [class*=rhap_repeat-button] {
+  @apply hover:text-accent;
+}
+
 .customPlayer button[aria-label="Disable loop"] {
   @apply text-accent;
 }
 
 .customPlayer button[aria-label="Pause"] {
-  @apply border-accent *:text-accent;
+  @apply border-accent *:text-accent *:hover:text-foreground;
 }
 
 .customPlayer button {
