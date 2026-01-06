@@ -23,7 +23,7 @@ export default function Tables({ tables, selectedTable, onSelect }) {
               alt={`Table ${table.id}`}
               className={`transition ${
                 // if the table is selected (if it has an id), set opacity to 100, else 80
-                selectedTable === table.id ? "opacity-100" : "opacity-80"
+                selectedTable === table.id ? "opacity-100" : "opacity-50"
             }`}
             
             />

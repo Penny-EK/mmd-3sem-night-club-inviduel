@@ -48,6 +48,13 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
   const onSubmit = async (data) => {
     try {
       setSuccess(false);
+
+      // Validate date
+      if (data.date.getTime() < Date.now()) {
+          setError("date", { message: "You cannot book a table in the past" });
+          return;
+        }
+
       // Validate selected table
       if (!selectedTable) {
         setError("table", {
@@ -194,7 +201,7 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
               errors.table ? "border-red-500" : "border-foreground"
             }`}
             value={
-              selectedTable ? `Table Number: ${selectedTable}` : "Table Number*"
+              selectedTable ? `Table Number: ${selectedTable}` : "Select Table Number Above*"
             }
           />
           {errors.table && <p className={errorStyle}>{errors.table.message}</p>}
@@ -226,6 +233,7 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
                 value={field.value}
                 onChange={field.onChange}
                 error={errors.date?.message}
+                className="flex w-full"
               />
             )}
           />
