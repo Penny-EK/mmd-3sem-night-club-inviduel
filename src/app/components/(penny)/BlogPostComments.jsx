@@ -2,6 +2,7 @@
 
 // react imports
 import { Suspense } from "react";
+import ConfirmationPopUp from "./ConfirmationPopUp";
 
 const BlogPostComments = ({ id, commentCount }) => {
   return (
@@ -24,7 +25,7 @@ const BlogPostComments = ({ id, commentCount }) => {
 const FetchComments = async ({ id }) => {
   const url = `http://localhost:4000/comments?blogpostId=${id}`;
   // disable caching to always get latest comments
-  const response = await fetch(url, { cache: "no-store" });
+  const response = await fetch(url);
   const comments = await response.json();
 
   // if no comments, show message
@@ -43,13 +44,16 @@ const FetchComments = async ({ id }) => {
     return (
       // each comment
       <li key={post.id} className="mb-[48px] pb-8">
-        <h3 className="mb-6 text-[18px] font-medium tracking-[0.36px]">
-          {post.name} -
-          <span className="text-accent text-[16px] tracking-[0.32px]">
-            {" "}
-            {formattedDate}
-          </span>
-        </h3>
+        <div className="mb-6 flex items-center gap-2">
+          <h3 className="text-[18px] font-medium tracking-[0.36px]">
+            {post.name} -
+            <span className="text-accent text-[16px] tracking-[0.32px]">
+              {" "}
+              {formattedDate}
+            </span>
+          </h3>
+          <ConfirmationPopUp id={post.id} email={post.email} />
+        </div>
         <p className="text-[16px] font-medium tracking-[0.32px]">
           {post.content}
         </p>
