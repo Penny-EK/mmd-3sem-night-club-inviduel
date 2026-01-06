@@ -24,7 +24,7 @@ const DateInput = forwardRef(function DateInput(
         ref={ref}
         onClick={onClick}
         value={value}
-        placeholder="Select Date"
+        placeholder="Select Date*"
         className={`text-foreground placeholder:text-foreground w-full border bg-transparent px-3 py-[18px] md:px-6 md:py-8 ${
           error ? "border-red-500" : "border-foreground"
         }`}
@@ -56,6 +56,7 @@ export default function DatePickerField({ value, onChange, error }) {
         // this makes the popup align under the input
         popperClassName="z-50"
         dateFormat="dd-MM-yyyy"
+        popperPlacement="right"
       />
 
       {error && <p className="mt-1 text-xs text-red-400">{error}</p>}
