@@ -27,7 +27,10 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
     reset,
     control,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    // Enable live validation on every change
+    mode: "onChange",
+  });
 
   // function to check if selected date is available for the selected table
   const checkAvailability = async (date, tableNumber) => {
@@ -211,6 +214,13 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
           <input
             {...register("guests", {
               required: "Please enter number of guests",
+              validate: (value) => {
+                const guests = Number(value);
+                if (!Number.isFinite(guests) || guests <= 0) {
+                  return "Please enter a valid number of guests";
+                }
+                return true;
+              },
             })}
             type="number"
             placeholder="Number of Guests*"
@@ -263,7 +273,15 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
           />
         </div>
 
-        <SubmitButton />
+        <button
+          className="ml-auto border-t-2 border-b-2 px-10 py-3 text-sm font-semibold tracking-wide uppercase transition hover:bg-pink-600 hover:text-black md:col-span-2"
+          type="submit"
+          // disable button while submitting
+          disabled={isSubmitting}
+        >
+          {/* if isSubmitting is true, change to "Submitting..." else show "Subscribe" */}
+          {isSubmitting ? "Submitting..." : "Subscribe"}
+        </button>
 
         {/* Success message */}
         {success && (
