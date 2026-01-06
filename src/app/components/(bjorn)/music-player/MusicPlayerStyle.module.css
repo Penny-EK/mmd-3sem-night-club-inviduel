@@ -24,7 +24,7 @@
 }
 
 .customPlayer [class*="rhap_volume-bar-area"] {
-  @apply px-4 max-lg:min-w-[150px];
+  @apply pr-4 max-lg:min-w-[150px];
 }
 
 .customPlayer [class*="rhap_progress-indicator"] {
