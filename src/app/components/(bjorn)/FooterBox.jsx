@@ -1,5 +1,7 @@
 // NextJS Components
 import Image from "next/image";
+// Other Components
+import ImageHover from "@/app/components/(bjorn)/ImageHover";
 // Asset Imports
 import FooterBg from "@/app/assets/bg/footerbg.jpg";
 import Logo from "@/app/assets/Logo.png";
@@ -124,14 +126,28 @@ const FetchPosts = async () => {
 
   return posts.slice(0, 2).map((post, index) => {
     return (
-      <Link key={post.id} href={`/blog-post/${post.id}`}>
-        <div className={`flex gap-x-6 ${index === 0 ? "mt-12" : "mt-20"}`}>
-          <Image
-            src={post.asset.url}
-            alt="Recent Post"
-            className="h-[120px] w-[120px] shrink-0 object-cover"
-            width={120}
-            height={120}
+      <div className={`${index === 0 ? "mt-12" : "mt-20"}`}>
+        <Link
+          key={post.id}
+          href={`/blog-post/${post.id}`}
+          className="flex gap-x-6"
+        >
+          <ImageHover
+            parentCSS="shrink-0"
+            imgSrc={post.asset.url}
+            imgAlt="Recent Post"
+            imgClass="w-[120px] h-[120px] object-cover"
+            imgWidth={120}
+            imgHeight={120}
+            cornerCSS="w-8"
+            topChildren={
+              <p
+                href="#"
+                className="tracking-2pct bg-accent translate-y-1/2 cursor-pointer self-end rounded-sm px-3 py-2 font-medium text-xs capitalize"
+              >
+                Go to Post
+              </p>
+            }
           />
           <div>
             <p className="tracking-2pct text-lg font-medium">
@@ -141,8 +157,8 @@ const FetchPosts = async () => {
               April 17, 2018
             </span>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     );
   });
 };

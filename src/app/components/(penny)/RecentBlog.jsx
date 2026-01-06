@@ -7,6 +7,9 @@ import Image from "next/image";
 // react imports
 import { Suspense } from "react";
 
+// other imports
+import ImageHover from "@/app/components/(bjorn)/ImageHover";
+
 const RecentBlog = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -39,12 +42,20 @@ const FetchPosts = async () => {
       return (
         <article key={post.id} className="grid max-md:mb-12 md:mb-0">
           <Link href={`/blog-post/${post.id}`}>
-            <Image
-              src={post.asset.url}
-              alt={post.title}
-              width={459}
-              height={240}
-              className="mb-4 h-[221px] w-full object-cover md:mb-0 md:max-h-60"
+            <ImageHover
+              imgSrc={post.asset.url}
+              imgAlt={post.title}
+              imgWidth={459}
+              imgHeight={240}
+              imgClass="mb-4 h-[221px] w-full object-cover md:mb-0 md:max-h-60"
+              topChildren={
+                <p
+                  href="#"
+                  className="tracking-2pct bg-accent cursor-pointer rounded-sm px-6 py-3 font-medium capitalize self-end translate-y-1/2"
+                >
+                  Go to Post
+                </p>
+              }
             />
 
             <div className="md:pt-12">

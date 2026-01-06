@@ -37,18 +37,20 @@ Sample use case:
 
 
 export default function ImageHover({
+  parentCSS = "",
   imgSrc,
   imgAlt,
   imgWidth,
   imgHeight,
-  imgClass,
+  imgClass = "",
   topChildren,
   bottomChildren,
-  topCSS,
-  bottomCSS
+  topCSS = "",
+  bottomCSS = "",
+  cornerCSS = ""
 }) {
   return (
-    <div className="hoverContainer group">
+    <div className={`hoverContainer group ${parentCSS}`}>
       <Image
         src={imgSrc || "/placeholder.webp"}
         alt={imgAlt || "Placeholder img of cat"}
@@ -58,7 +60,7 @@ export default function ImageHover({
       />
       <div className="group">
         <div className={`hoverChild absolute top-0 bottom-1/2 left-0 grid w-full place-items-center ${topCSS}`}>
-          <CornerElem topLeft={true} className="w-15" />
+          <CornerElem topLeft={true} className={cornerCSS || "w-15"} />
           {topChildren}
         </div>
         <div className={`hoverChild absolute top-1/2 bottom-0 left-0 grid w-full place-items-center ${bottomCSS}`}>
@@ -67,7 +69,7 @@ export default function ImageHover({
               {bottomChildren}
             </div>
           )}
-          <CornerElem bottomRight={true} className="w-15" />
+          <CornerElem bottomRight={true} className={cornerCSS || "w-15"} />
         </div>
       </div>
     </div>
