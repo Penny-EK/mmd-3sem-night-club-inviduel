@@ -27,7 +27,10 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
     reset,
     control,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    // Enable live validation on every change
+    mode: "onChange",
+  });
 
   // function to check if selected date is available for the selected table
   const checkAvailability = async (date, tableNumber) => {
@@ -210,7 +213,7 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
                   return "Please enter a valid number of guests";
                 }
                 return true;
-              }
+              },
             })}
             type="number"
             placeholder="Number of Guests*"
