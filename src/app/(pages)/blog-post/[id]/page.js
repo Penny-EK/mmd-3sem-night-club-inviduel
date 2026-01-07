@@ -43,7 +43,7 @@ const BlogPost = async ({ params }) => {
             {post.title}
           </h2>
           <p className="text-accent mt-4 font-medium tracking-[0.36px]">
-            BY: {post.author} / {commentCount} Comments
+            BY: {post.author} / <a href="#comments">{commentCount} Comments</a>
           </p>
           <p className="mt-4 text-[16px] leading-6 font-medium tracking-[0.32px] md:text-[18px]">
             {post.content}
