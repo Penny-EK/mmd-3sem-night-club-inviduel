@@ -1,6 +1,11 @@
+// this component provides a confirmation popup for deleting comments with email verification
+
 "use client";
 
+// react imports
 import { useState } from "react";
+
+// next components
 import { useRouter } from "next/navigation";
 
 // icon imports
@@ -12,18 +17,23 @@ const ConfirmationPopUp = ({ id, email }) => {
   const [emailInput, setEmailInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // handles delete action after email verification
   const handleDelete = async () => {
+    // verify email matches before allowing deletion
     if (emailInput.trim().toLowerCase() !== email.toLowerCase()) {
       setErrorMessage("Email does not match!");
       return;
     }
 
+    // send delete request to api
     try {
       const response = await fetch(`http://localhost:4000/comments/${id}`, {
         method: "DELETE",
       });
 
       if (response.ok) {
+        // reset form and close popup on success
+        document.body.style.overflow = "unset";
         setShowPopUp(false);
         setEmailInput("");
         setErrorMessage("");
@@ -38,7 +48,9 @@ const ConfirmationPopUp = ({ id, email }) => {
     }
   };
 
+  // handles cancel action and resets form
   const handleCancel = () => {
+    document.body.style.overflow = "unset";
     setShowPopUp(false);
     setEmailInput("");
     setErrorMessage("");
@@ -46,14 +58,19 @@ const ConfirmationPopUp = ({ id, email }) => {
 
   return (
     <div>
+      {/* delete icon button to trigger popup */}
       <RiDeleteBinLine
         size={25}
         className="hover:text-accent cursor-pointer"
-        onClick={() => setShowPopUp(true)}
+        onClick={() => {
+          document.body.style.overflow = "hidden";
+          setShowPopUp(true);
+        }}
       />
+      {/* confirmation popup modal */}
       {showPopUp && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-          <div className="min-w-[300px] rounded-lg bg-(--background) p-5">
+          <div className="min-w-[300px] border-2 bg-(--background) p-5">
             <h2 className="text-xl font-bold">Delete Comment</h2>
             <p className="mt-2">
               Are you sure you want to delete this comment?
@@ -69,18 +86,20 @@ const ConfirmationPopUp = ({ id, email }) => {
               className="border-accent mb-4 w-full rounded border p-2"
             />
 
+            {/* display error message if email doesn't match */}
             {errorMessage && (
               <p className="mb-3 text-sm text-red-500">{errorMessage}</p>
             )}
 
+            {/* action buttons */}
             <div className="mt-5 flex gap-2.5">
               <button
                 onClick={handleDelete}
                 disabled={!emailInput}
-                className={`rounded px-5 py-2.5 text-white ${
+                className={`className="ml-auto hover:text-black" cursor-pointer border-t-2 border-b-2 px-10 py-3 text-sm font-semibold tracking-wide uppercase transition hover:border-0 hover:bg-pink-600 ${
                   emailInput
-                    ? "cursor-pointer bg-red-500 hover:bg-red-600"
-                    : "cursor-not-allowed bg-gray-400 opacity-60"
+                    ? "cursor-pointer"
+                    : "cursor-not-allowed opacity-60"
                 }`}
               >
                 Delete
