@@ -6,9 +6,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-// component imports
-import SubmitButton from "@/app/components/(meleese)/buttons/Submit";
-
 const CommentReactForm = ({ id }) => {
   const router = useRouter();
   const [success, setSuccess] = useState(false);
@@ -22,6 +19,7 @@ const CommentReactForm = ({ id }) => {
   } = useForm({
     // Enable live validation on every change
     mode: "onChange",
+    
   });
 
   // styling
@@ -165,7 +163,7 @@ const CommentReactForm = ({ id }) => {
             {errors.root && <p className={errorStyle}>{errors.root.message}</p>}
 
             <button
-              className="ml-auto border-t-2 border-b-2 px-10 py-3 text-sm font-semibold tracking-wide uppercase transition hover:bg-pink-600 hover:text-black"
+              className="ml-auto cursor-pointer border-t-2 border-b-2 px-10 py-3 text-sm font-semibold tracking-wide uppercase transition hover:bg-pink-600 hover:text-black"
               type="submit"
               // disable button while submitting
               disabled={isSubmitting}

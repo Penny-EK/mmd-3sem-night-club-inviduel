@@ -15,7 +15,9 @@ const BlogPostComments = ({ id, commentCount }) => {
       <Suspense fallback={<div>Loading comments...</div>}>
         <ul>
           {/* makes sure its only the comments from the right id that gets fetched */}
-          <FetchComments id={id} />
+          <div id="comments">
+            <FetchComments id={id} />
+          </div>
         </ul>
       </Suspense>
     </>

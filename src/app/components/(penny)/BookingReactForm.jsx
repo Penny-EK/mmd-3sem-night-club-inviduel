@@ -4,7 +4,7 @@
 "use client";
 
 // React imports
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 // Component imports
@@ -25,11 +25,28 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
     setError,
     reset,
     control,
+    trigger,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     // Enable live validation on every change
     mode: "onChange",
   });
+
+  // Track previous selectedTable value to detect changes
+  const prevSelectedTableRef = useRef(selectedTable);
+
+  // Trigger table validation when selectedTable changes
+  if (prevSelectedTableRef.current !== selectedTable) {
+    prevSelectedTableRef.current = selectedTable;
+    const tableValue = selectedTable
+      ? `Table Number: ${selectedTable}`
+      : "Select Table Number Above*";
+    setValue("table", tableValue);
+    setTimeout(() => {
+      trigger("table");
+    }, 0);
+  }
 
   // function to check if selected date is available for the selected table
   const checkAvailability = async (date, tableNumber) => {
@@ -50,35 +67,6 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
   const onSubmit = async (data) => {
     try {
       setSuccess(false);
-
-      // Validate date
-      if (data.date.getTime() < Date.now()) {
-        setError("date", { message: "You cannot book a table in the past" });
-        return;
-      }
-
-      // Validate selected table
-      if (!selectedTable) {
-        setError("table", {
-          message: "Please select a table",
-        });
-        return;
-      }
-
-      // Validate number of guests
-      const guests = Number(data.guests);
-      const seats = tables.find((i) => i.id == selectedTable).type;
-      if (!Number.isFinite(guests) || guests <= 0) {
-        setError("guests", {
-          message: "Please enter a valid number of guests",
-        });
-        return;
-      } else if (guests > seats) {
-        setError("guests", {
-          message: "Table only has room for " + seats + " guests",
-        });
-        return;
-      }
 
       // Add table number to data and remove the table field (it's just for display)
       const { table, ...formData } = data;
@@ -220,6 +208,13 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
                 if (!Number.isFinite(guests) || guests <= 0) {
                   return "Please enter a valid number of guests";
                 }
+                // Check if guests exceed table capacity
+                if (selectedTable) {
+                  const seats = tables.find((i) => i.id == selectedTable)?.type;
+                  if (seats && guests > seats) {
+                    return `Table only has room for ${seats} guests`;
+                  }
+                }
                 return true;
               },
             })}
@@ -238,7 +233,22 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
           <Controller
             name="date"
             control={control}
-            rules={{ required: "Please select a date" }}
+            rules={{
+              required: "Please select a date",
+              validate: (value) => {
+                if (!value) return true;
+                // Compare dates at midnight to avoid millisecond differences between server/client
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const selectedDate = new Date(value);
+                selectedDate.setHours(0, 0, 0, 0);
+
+                if (selectedDate < today) {
+                  return "You cannot book a table in the past";
+                }
+                return true;
+              },
+            }}
             render={({ field }) => (
               <DatePicker
                 value={field.value}
@@ -275,7 +285,7 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
         </div>
 
         <button
-          className="ml-auto border-t-2 border-b-2 px-10 py-3 text-sm font-semibold tracking-wide uppercase transition hover:bg-pink-600 hover:text-black md:col-span-2"
+          className="ml-auto cursor-pointer border-t-2 border-b-2 px-10 py-3 text-sm font-semibold tracking-wide uppercase transition hover:bg-pink-600 hover:text-black md:col-span-2"
           type="submit"
           // disable button while submitting
           disabled={isSubmitting}
