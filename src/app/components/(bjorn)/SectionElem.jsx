@@ -21,7 +21,7 @@ export default function SectionElem({
       }
     >
       {title ? (
-        <div className="relative mb-16 max-md:text-center">
+        <div className="relative mb-16 max-md:text-center max-md:px-6">
           <h1 className="tracking-7pct pb-4 text-4xl font-medium uppercase max-md:text-3xl">
             {title}
           </h1>

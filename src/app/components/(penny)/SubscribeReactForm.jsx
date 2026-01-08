@@ -20,7 +20,7 @@ const SubscribeReactForm = () => {
   } = useForm();
 
   // styling
-  const errorStyle = "mt-1 text-xs text-red-400";
+  const errorStyle = "mt-2 text-xs text-red-400";
 
   // when form is submitted, handleSubmit calls onSubmit function
   const onSubmit = async (data) => {
@@ -77,17 +77,17 @@ const SubscribeReactForm = () => {
   // rendering the component
 
   return (
-    <div className="col-start-1 col-end-4 mt-[95px] mb-[18px] flex w-full flex-col items-center justify-center bg-black pt-16 text-white">
-      <h1 className="font-medium tracking-widest uppercase">
-        want the latest night club news
-      </h1>
-      <h2 className="-tracking-wider">
+    <div className="col-span-full mt-[95px] grid justify-center justify-items-center bg-black px-6 py-20 max-md:py-7 text-white">
+      <h2 className="tracking-2pct font-medium uppercase text-2xl text-center">
+        Want the latest night club news
+      </h2>
+      <p className="mt-2 font-medium max-md:max-w-[26ch] text-center">
         Subscribe to our newsletter and never miss an{" "}
         <span className="text-accent">Event</span>
-      </h2>
+      </p>
       {/* Subscription form */}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-6 mb-6 flex flex-col justify-center gap-4 md:flex-row">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 justify-self-center">
+        <div className="flex gap-4 max-md:grid max-md:grid-flow-row">
           <input
             {...register("email", {
               // if input is empty - show error message
@@ -100,13 +100,16 @@ const SubscribeReactForm = () => {
                 return true;
               },
             })}
-            className={`${errors.email ? "border-red-500" : "border-white"} min-w-96 border-b-2 bg-transparent text-white placeholder:text-white`}
+            className={`${errors.email ? "border-red-500" : "border-foreground"} border-b-2 bg-transparent text-foreground placeholder:text-foreground py-4 px-4 min-w-[510px] max-sm:min-w-0`}
             type="text"
             placeholder="Enter Your Email"
           />
 
           <button
-            className="cursor-pointer border-t-2 border-b-2 px-10 py-3 text-sm font-semibold tracking-wide uppercase transition hover:bg-pink-600 hover:text-black"
+
+            className="cursor-pointer border-t-2 border-b-2 px-10 py-3 text-sm font-semibold tracking-wide uppercase transition hover:bg-pink-600 hover:text-black w-fit justify-self-center"
+
+
             type="submit"
             // disable button while submitting
             disabled={isSubmitting}

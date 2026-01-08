@@ -88,7 +88,7 @@ export default function TestimonialsContent({ data }) {
   };
 
   return (
-    <div className="bg-background-alpha col-span-full grid grid-cols-subgrid *:col-start-2">
+    <div className="bg-background-alpha col-span-full grid grid-cols-subgrid *:col-start-2 max-md:px-6">
       <div className="my-24 grid place-items-center gap-y-16">
         <div className="w-full overflow-hidden px-8 max-md:px-0">
           <div

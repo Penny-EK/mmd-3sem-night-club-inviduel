@@ -137,7 +137,7 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
   // rendering the component
 
   return (
-    <div className="mt-12 mb-24 space-y-6">
+    <div className="mt-12 mb-24 space-y-6 px-6">
       <h2 className="text-xl font-bold tracking-wide uppercase">
         Book a table
       </h2>

@@ -38,7 +38,7 @@ const BlogPost = async ({ params }) => {
           height={608}
           className="mb-4 grid h-[221px] w-full object-cover max-md:col-start-1 max-md:col-end-4 md:h-[608px]"
         />
-        <div className="pl-1">
+        <div className="px-6">
           <h2 className="mt-4 text-2xl font-medium tracking-[0.48px] uppercase">
             {post.title}
           </h2>
