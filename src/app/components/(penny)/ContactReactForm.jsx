@@ -20,7 +20,10 @@ const ContactReactForm = () => {
     setError,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    // Enable live validation on every change
+    mode: "onChange",
+  });
 
   // Base input styling
   const base =
@@ -138,8 +141,8 @@ const ContactReactForm = () => {
           // disable button while submitting
           disabled={isSubmitting}
         >
-          {/* if isSubmitting is true, change to "Submitting..." else show "Subscribe" */}
-          {isSubmitting ? "Submitting..." : "Subscribe"}
+          {/* if isSubmitting is true, change to "Submitting..." else show "Send" */}
+          {isSubmitting ? "Sending..." : "Send"}
         </button>
 
         {/* Success message */}

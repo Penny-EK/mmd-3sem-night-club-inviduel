@@ -126,9 +126,8 @@ const FetchPosts = async () => {
 
   return posts.slice(0, 2).map((post, index) => {
     return (
-      <div className={`${index === 0 ? "mt-12" : "mt-20"}`}>
+      <div key={post.id} className={`${index === 0 ? "mt-12" : "mt-20"}`}>
         <Link
-          key={post.id}
           href={`/blog-post/${post.id}`}
           className="flex gap-x-6"
         >

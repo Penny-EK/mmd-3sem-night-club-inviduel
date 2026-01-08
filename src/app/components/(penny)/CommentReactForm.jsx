@@ -19,7 +19,10 @@ const CommentReactForm = ({ id }) => {
     setError,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    // Enable live validation on every change
+    mode: "onChange",
+  });
 
   // styling
   const baseInput =
@@ -167,8 +170,8 @@ const CommentReactForm = ({ id }) => {
               // disable button while submitting
               disabled={isSubmitting}
             >
-              {/* if isSubmitting is true, change to "Submitting..." else show "Subscribe" */}
-              {isSubmitting ? "Submitting..." : "Subscribe"}
+              {/* if isSubmitting is true, change to "Submitting..." else show "Submit" */}
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </div>

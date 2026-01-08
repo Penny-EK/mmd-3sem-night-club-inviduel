@@ -22,6 +22,18 @@ export default function Paginator({ totalPages }) {
 
   return (
     <>
+      {/* Previous page button */}
+      <li>
+        <button
+          onClick={() => handleClick(currentPage - 1)}
+          disabled={currentPage <= 1}
+          // disable button if on first page
+          className={`cursor-pointer ${currentPage <= 1 ? "cursor-not-allowed opacity-50" : ""}`}
+        >
+          &lt; Prev
+        </button>
+      </li>
+
       {/* create an a array based on total pages */}
       {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
         <li key={pageNum}>

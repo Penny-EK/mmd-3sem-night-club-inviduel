@@ -2,7 +2,7 @@ import { motion } from "motion/react"
 
 export default function Tables({ tables, selectedTable, onSelect }) {
   return (
-    <div className="grid grid-cols-1 gap-10 justify-items-center md:grid-cols-5">
+    <div className="grid grid-cols-1 gap-10 justify-items-center md:grid-cols-5 px-6">
         {/* map all the tables from the page.js */}
       {tables.map((table) => {
         const imgSrc = `/table/table_${table.type}.png`;

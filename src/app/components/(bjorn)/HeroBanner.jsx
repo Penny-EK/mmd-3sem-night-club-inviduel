@@ -29,9 +29,9 @@ export default function HeroBanner() {
           className="h-[868px] w-full object-cover"
         />
       </motion.div>
-      <div className="grid place-items-center gap-y-4 px-8 backdrop-blur-xs">
+      <div className="grid place-items-center gap-y-4 px-8">
         <motion.div
-          className="w-full max-w-[745px]"
+          className="w-full max-w-[745px] bg-[color-mix(in_srgb,var(--background)_20%,transparent)] backdrop-blur-sm"
           style={{ transformOrigin: "center bottom" }}
           initial={{ opacity: 0, rotateX: 70 }}
           animate={{ opacity: 1, rotateX: 0 }}
@@ -40,7 +40,7 @@ export default function HeroBanner() {
           <Image src={LogoSvg} alt="Logo" />
         </motion.div>
         <motion.p
-          className="text-3xl font-medium tracking-[100%] uppercase max-lg:text-2xl max-md:text-xl max-sm:text-xs"
+          className="text-3xl font-medium tracking-[100%] uppercase max-lg:text-2xl max-md:text-xl max-sm:text-xs bg-[color-mix(in_srgb,var(--background)_20%,transparent)] backdrop-blur-sm"
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.5, ease: "easeInOut" }}

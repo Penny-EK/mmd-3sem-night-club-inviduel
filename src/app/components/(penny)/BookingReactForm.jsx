@@ -9,7 +9,6 @@ import { useForm, Controller } from "react-hook-form";
 
 // Component imports
 import DatePicker from "@/app/components/(penny)/ReactDatePicker";
-import SubmitButton from "@/app/components/(meleese)/buttons/Submit";
 
 const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
   // styles
@@ -54,9 +53,9 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
 
       // Validate date
       if (data.date.getTime() < Date.now()) {
-          setError("date", { message: "You cannot book a table in the past" });
-          return;
-        }
+        setError("date", { message: "You cannot book a table in the past" });
+        return;
+      }
 
       // Validate selected table
       if (!selectedTable) {
@@ -138,7 +137,7 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
   // rendering the component
 
   return (
-    <div className="mt-12 mb-24 space-y-6">
+    <div className="mt-12 mb-24 space-y-6 px-6">
       <h2 className="text-xl font-bold tracking-wide uppercase">
         Book a table
       </h2>
@@ -204,7 +203,9 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
               errors.table ? "border-red-500" : "border-foreground"
             }`}
             value={
-              selectedTable ? `Table Number: ${selectedTable}` : "Select Table Number Above*"
+              selectedTable
+                ? `Table Number: ${selectedTable}`
+                : "Select Table Number Above*"
             }
           />
           {errors.table && <p className={errorStyle}>{errors.table.message}</p>}
@@ -279,8 +280,8 @@ const BookingReactForm = ({ tables, selectedTable, onTableReset }) => {
           // disable button while submitting
           disabled={isSubmitting}
         >
-          {/* if isSubmitting is true, change to "Submitting..." else show "Subscribe" */}
-          {isSubmitting ? "Submitting..." : "Subscribe"}
+          {/* if isSubmitting is true, change to "Reserving..." else show "Reserve" */}
+          {isSubmitting ? "Reserving..." : "Reserve"}
         </button>
 
         {/* Success message */}
