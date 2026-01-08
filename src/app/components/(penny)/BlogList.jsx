@@ -52,7 +52,7 @@ const FetchPosts = async ({ page }) => {
       const isEven = (index + 1) % 2 === 0;
 
       return (
-        <li key={post.id} className="pb-8 md:pb-0">
+        <li key={post.id} className="pb-6 md:pb-0">
           {/* image row that breaks out */}
           <div className="full-bleed bg-background md:grid md:grid-cols-2">
             <Image
@@ -67,11 +67,11 @@ const FetchPosts = async ({ page }) => {
 
             {/* text column */}
             <div
-              className={`mb-8 px-4 md:px-10 md:pt-12 md:pl-10 ${
+              className={`mb-8 px-6 py-8 md:px-10 md:pt-12 md:pl-10 ${
                 isEven ? "md:order-1" : ""
               }`}
             >
-              <h2 className="mt-4 text-2xl font-medium tracking-[0.48px] uppercase">
+              <h2 className="text-2xl font-medium tracking-[0.48px] uppercase">
                 {post.title}
               </h2>
               <p className="text-accent mt-4 font-medium tracking-[0.36px]">

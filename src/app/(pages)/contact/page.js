@@ -8,7 +8,7 @@ export default function Contact() {
       <HeaderNav />
       <main>
         <SubHeader title="Contact Us" />
-        <div className="col-start-2">
+        <div className="col-start-2 px-6">
           <ContactReactForm />
         </div>
       </main>

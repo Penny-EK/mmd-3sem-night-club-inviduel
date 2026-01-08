@@ -116,7 +116,7 @@ export default function GalleryContent({ data }) {
   };
 
   return (
-    <div className="grid place-items-center gap-y-16">
+    <div className="grid place-items-center gap-y-16 max-md:px-6">
       <div className="w-full overflow-hidden px-8 max-md:px-0">
         <div
           ref={scrollingContainer}

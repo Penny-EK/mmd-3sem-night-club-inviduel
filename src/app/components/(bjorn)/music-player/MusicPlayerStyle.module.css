@@ -12,7 +12,7 @@
 }
 
 .customPlayer {
-  @apply bg-transparent px-0 max-lg:min-w-[350px];
+  @apply bg-transparent px-0 max-lg:min-w-[310px];
 }
 
 .customPlayer [class*="rhap_progress-bar"], .customPlayer [class*="rhap_volume-bar"] {

@@ -82,7 +82,7 @@ export default function MusicPlayer() {
   };
 
   return (
-    <div className="grid max-lg:grid-cols-subgrid">
+    <div className="grid max-md:px-6">
       <div className="flex items-center gap-x-4">
         <Image
           src={audioTracks[currentTrack].image}
